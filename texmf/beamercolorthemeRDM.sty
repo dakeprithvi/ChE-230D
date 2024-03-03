@@ -1,0 +1,48 @@
+\ProvidesPackage{beamercolorthemeRDM}
+
+\mode<presentation>
+
+%\definecolor{ucsbblue}{RGB}{196,30,58} %ucsb blue
+\definecolor{ucsbblue}{RGB}{0,77,159} %ucsb blue
+%\definecolor{ucsbgold}{RGB}{204,153,051} %ucsb gold on seal; too dark, use sandstone
+\definecolor{ucsbgold}{RGB}{231,209,154}
+\definecolor{ucsbsand}{RGB}{231,209,154}
+\definecolor{lightgray}{HTML}{eeeeee}
+
+\setbeamercolor{alerted text}{fg=ucsbblue!80!ucsbgold}
+\setbeamercolor*{palette primary}{fg=black,bg=ucsbblue!50!white}
+\setbeamercolor*{palette secondary}{bg=ucsbblue!70!black,fg=ucsbgold!60!lightgray}
+\setbeamercolor*{palette tertiary}{fg=ucsbblue!50!black,bg=ucsbgold!80!lightgray}
+\setbeamercolor*{palette quaternary}{fg=ucsbblue,bg=ucsbgold!20!lightgray}
+\setbeamercolor*{palette quinary}{fg=white,bg=ucsbblue}
+\setbeamercolor*{palette hexary}{fg=black,bg=ucsbsand!40!white}
+
+\setbeamercolor*{sidebar}{fg=ucsbblue,bg=ucsbgold!75!white}
+
+\setbeamercolor*{palette sidebar primary}{fg=ucsbblue!10!black}
+\setbeamercolor*{palette sidebar secondary}{fg=white}
+\setbeamercolor*{palette sidebar tertiary}{fg=ucsbblue!50!black}
+\setbeamercolor*{palette sidebar quaternary}{fg=ucsbgold!10!lightgray}
+
+\setbeamercolor*{titlelike}{parent=palette primary}
+\setbeamercolor{frametitle}{bg=ucsbgold!90!lightgray}
+\setbeamercolor{frametitle right}{bg=ucsbgold!60!lightgray}
+%\setbeamercolor{frametitle right}{bg=ucsbgold!90!lightgray}
+
+\setbeamercolor{block title}{fg=ucsbblue,bg=ucsbgold}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg!75!black}
+\setbeamercolor{block title example}{use=example text,fg=white,bg=example text.fg!75!black}
+% \setbeamercolor{block title alerted}{use=alerted text,fg=ucsbblue,bg=ucsbsand}
+% \setbeamercolor{block title example}{use=example text,fg=ucsbblue,bg=ucsbsand}
+
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!25!bg}
+ \setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!10!bg}
+ \setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+% \setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=ucsbsand}
+% \setbeamercolor{block body example}{parent=normal text,use=block title example,bg=ucsbsand}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\mode
+<all>

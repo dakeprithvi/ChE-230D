@@ -31,6 +31,7 @@ plt.xlabel("time")
 plt.ylabel("Concentration")
 plt.legend(["A","B","C"])
 plt.title("Basecase model")
+plt.show()
 
 #Basecase data corrupted by adding IID error to all concentration measurments
 Cmeas = np.array([E[0][0],E[0][1],E[0][2]])
@@ -41,12 +42,13 @@ plt.xlabel("time")
 plt.ylabel("Concentration")
 plt.legend(["A","B","C"])
 plt.title("Measurement data")
+plt.show()
 
 #Jim's data from lin_kin_1.mat
 #Previous Cmeas variable is now rewritten to consider this data
 from scipy.io import loadmat
 t = np.linspace(0,20,25)
-data = loadmat('lin_kin_1.mat')
+data = loadmat('lin_kin.mat')
 Cmeas = data["ymeas"]
 Cmeas = Cmeas.T
 [plt.scatter(t, Cmeas[i]) for i in range(Cmeas.shape[0])];
@@ -54,6 +56,7 @@ plt.xlabel("time")
 plt.ylabel("Concentration")
 plt.legend(["A","B","C"])
 plt.title("Measurement data")
+plt.show()
 
 #Fitting model where we know mechanism
 def mech_model(K):
@@ -86,6 +89,7 @@ plt.xlabel("time")
 plt.ylabel("Concentration")
 plt.legend(["A","B","C"])
 plt.title("Mech")
+plt.show()
 
 #Fitting model where we know only stoichiometry
 def black_box_model(K):
@@ -116,6 +120,7 @@ plt.xlabel("time")
 plt.ylabel("Concentration")
 plt.legend(["A","B","C"])
 plt.title("Black_box")
+plt.show()
 
 #Fitting model where we know nothing except number of species
 def stoi_model(K):
@@ -148,6 +153,7 @@ plt.xlabel("time")
 plt.ylabel("Concentration")
 plt.legend(["A","B","C"])
 plt.title("Stoi")
+plt.show()
 
 #Solving for a CSTR
 u = np.linspace(0.01,1,500)
@@ -176,3 +182,4 @@ plt.xlabel("u")
 plt.ylabel("Concentration")
 plt.legend(["True optimum","model","mech","stoi","black_box"])
 plt.title("Model comparison")
+plt.show()

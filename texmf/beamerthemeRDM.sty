@@ -1,0 +1,42 @@
+\ProvidesPackage{beamerthemeRDM}
+
+% process options to SantaBarbara
+\newif\ifbeamer@thinframetitle
+\beamer@thinframetitlefalse
+\DeclareOptionBeamer{thinframetitle}{\beamer@thinframetitletrue}
+
+\ProcessOptionsBeamer
+
+
+\mode<presentation>
+
+%shade the background area in the slide; otherwise white
+%\beamertemplateshadingbackground{red!10}{blue!10}
+
+% Remove navigation symbols (p. 56 of 3.01 User's guide)
+% \setbeamertemplate{navigation symbols}{}
+
+\useinnertheme[shadow=true]{rounded}
+\useoutertheme{RDM}
+\usecolortheme{RDM}
+
+%\pgfdeclareimage[height=2.0cm]{ucsb-logo}{UCSB_seal.pdf}
+%\pgfdeclareimage[height=1.5cm]{ucsb-logo-horiz}{UWlogo_fl_4c}
+
+% Tills' opinion: should be done in an inner theme, not here.
+
+\usesubitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{beamerstructure}$\blacktriangleright$}%
+}
+\usesubsubitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{beamerstructure}$\bigstar$}%
+}
+
+\setbeamertemplate{section in toc}[circle]
+
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+\setbeamertemplate{headline}[default]
+
+\mode
+<all>

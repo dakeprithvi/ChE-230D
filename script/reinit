@@ -1,0 +1,31 @@
+#! /bin/bash
+
+# Start by removing existing changelog.
+echo "*** Removing existing .git folder. ***"
+rm -rf .git
+
+# Get rid of meta-readme and remove lines from README.
+rm README.md
+mv README README.all && grep -v "<SKELETON>" README.all > README && rm README.all
+
+# Remove other files.
+rm -r testfiles
+rm .gitignore
+
+# Reinitialize and add files that are missed by .hgignore.
+echo "*** Adding files to fresh .git folder. ***"
+git init --shared=true
+git add .
+git rm --cached script/reinit
+git commit -m "Initial commit."
+
+# Push copy to remote location and update .git/config
+# Pushes to server specified by first input and location based on second input
+if [ $# -eq 2 ]
+then
+    echo "*** Pushing to remote location. ***"
+    ssh $1 "git init --bare --shared=true ${2}"
+    git remote add origin ssh://$1/$2
+    git push -u origin master
+fi
+
