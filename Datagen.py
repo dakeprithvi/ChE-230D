@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 plt.rcParams['font.size'] = 16
 plt.rcParams['lines.linewidth'] = 2
 plt.rcParams['lines.color'] = 'red'
+plt.rcParams['axes.linewidth'] = 2
 
 def prbs(cf):
     cf = cf +  np.random.normal(0,5)

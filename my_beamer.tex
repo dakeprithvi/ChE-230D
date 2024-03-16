@@ -41,6 +41,7 @@
 \usepackage{pgfplots}
 \usepackage{ragged2e}
 \usepackage{rxn}
+\usepackage{hyperref}
 
 
 \usetikzlibrary{shapes,calc,spy, calc, backgrounds,arrows, fit, decorations.pathmorphing, decorations.pathreplacing, matrix}
@@ -165,7 +166,7 @@ Simulated data for the process model using PRBS signal
 \end{frame}
 
 
-\section{Structured greybox model}
+\section{Towards a structured greybox model}
 \begin{frame}
     \frametitle{Structured greybox model}
     
@@ -214,14 +215,66 @@ L(U,Y,\beta) = \sum_{i=1}^{N_tr} \sum_{k=0}^{N_t} |y_i(k) - \hat{y}_i (k)|^2
 \end{frame}
 
 
+\begin{frame}
+    \frametitle{Results of training and validation}
+    
+    \begin{columns}
+    {   \begin{column}{0.5\textwidth}
+        \includegraphics[page=1, width=\textwidth]{Train_mean.pdf}
+        \begin{center}
+        \scriptsize{Training of the hybrid model}
+        \end{center}
+        \end{column}}
+        \begin{column}{0.5\textwidth}
+        \vspace{4mm}
+        \includegraphics[page=2, width=1\textwidth]{Train_mean.pdf}
+        \begin{center}
+        \scriptsize{Performance of trained model on validation data set. We get considerably good-fit considering we have partial state measurements.}
+        \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\section{Quantile regression}
+\begin{frame}
+    \frametitle{Uncertainty prediction}
+    
+    \begin{columns}
+    {   \begin{column}{0.5\textwidth}
+        \begin{block}{Quantile regression (Pinball loss)}
+        \begin{align*}
+        L_{\tau}(y,\hat{y}) &= max[\tau (y - \hat{y}), (1  - \tau) (\hat{y} - y)] \\
+        L_{\tau} &= \sum_{i=1}^N L_{\tau} (y_i,\hat{y}_i)
+        \end{align*}
+        \end{block}
+        \begin{block}{Conclusion}
+        \begin{enumerate}
+        \item Quantile regression is a computationally cheap uncertainty estimation method for neural network
+        \item It predicts data uncertainty not model uncertainty.
+        \item Ensembling (bootstrap) or Bayesian neural networks could be better approaches but are computationally expensive
+        \end{enumerate}
+        \end{block}
+        \end{column}}
+        \begin{column}{0.5\textwidth}
+        \includegraphics[width=1\textwidth]{Uncertainty.pdf}
+        \begin{center}
+        \scriptsize{The grey region indicates 2.5\% and 97.5\% quantile ranges for the hybrid model prediction.}
+        \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
 
 
-
-
-\begin{frame}{Resources}
+\begin{frame}{Code and Resources}
+\begin{enumerate}
+\item All the code can be pulled from: \url{https://github.com/dakeprithvi/ChE-230D.git}
+\item If you are using linux OS, just run `make' over the repo
+\item Advanced libraries like PyTorch or TensorFlow are deliberately avoided to keep the code simple and reproducible.
+\item For this purpose, JAX (a new library developed by Google) has been used. 
+\end{enumerate}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.1\textwidth]{jax_logo.png}
+\includegraphics[width=0.7\textwidth]{jax_logo.png}
 \end{figure}
 \end{frame}
 \end{document}

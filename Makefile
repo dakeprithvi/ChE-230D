@@ -116,7 +116,7 @@ OCT_DAT_SRC :=
 
 ## PY_PLOT files are .py files that create .pdf plots.
 
-PY_PLOT := Datagen.py
+PY_PLOT := Datagen.py Train_mean.py Uncertainty.py
 
 ## PY_MOVIE files are .py files that create movies as a .pdf document.
 
