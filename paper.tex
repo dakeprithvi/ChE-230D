@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage[margin=2.54cm]{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{polynom}
+\usepackage{placeins}
+\usepackage{longtable}
+
+\DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
+\DeclareOldFontCommand{\it}{\normalfont\rmfamily}{\mathrm}
+\usepackage{mathtools}
+
+
+\usepackage{amsmath, bm}   % Extra math commands and environments from the AMS
+\usepackage{amssymb}   % Special symbols from the AMS
+\usepackage{amsthm}    % Enhanced theorem and proof environments from the AMS
+\usepackage{latexsym}  % A few extra LaTeX symbols
+\usepackage{rxn}
+\RequirePackage{booktabs}
+\RequirePackage{units_jbr}
+\RequirePackage{mpcsymbols}
+
+\usepackage{url}
+\providecommand{\email}{}
+\renewcommand{\email}[1]{\texttt{#1}}
+
+\usepackage[authoryear,round]{natbib}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newtheorem{property}[theorem]{Property}
+
+%\newcommand{\tL}{\tilde{L}}
+
+\graphicspath{{./}{./figures/}{./figures/paper/}}
+
+\setcounter{topnumber}{2}              %% 2
+\setcounter{bottomnumber}{1}           %% 1
+\setcounter{totalnumber}{3}            %% 3
+\renewcommand{\topfraction}{0.9}       %% 0.7
+\renewcommand{\bottomfraction}{0.9}    %% 0.3
+\renewcommand{\textfraction}{0.1}      %% 0.2
+\renewcommand{\floatpagefraction}{.7}  %% 0.5
+
+\title{Structured non-linear hybrid model - ChE 230D}
+\author{Prithvi Dake\\
+Department of Chemical Engineering\\
+University of California, Santa  Barbara\\
+Santa Barbara, CA 93106}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+The project is specifically aimed at model indentification applied to chemical plants. Here, we show a simplified `hybrid' modelling approach using neural networks to represent the difficult-to-model parts in the first-principles implementation \citep{kumar:rawlings:2023a}. We end the presentation with quantile regression to make the model selectively learn a certain quantile of the data which can then be used for uncertainty prediction.\\
+\newline
+\textbf{TOC:}
+\section{Incentive for deep learning (specifically hybrid modelling)}
+\section{Case study for partial state measurement}
+\section{Towards a structured `greybox' model}
+\section{Quantile regression for uncertainty prediction}
+
+
+
+\bibliographystyle{abbrvnat}
+\bibliography{abbreviations,articles,books,unpub,proceedings}
+\end{document}
