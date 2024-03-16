@@ -82,7 +82,7 @@
     \pgfuseimage{ucsb-logo}}
 
 \date{ChE 230D Project \\
-\today}
+March 21, 2024}
 
 %\AtBeginSection[]
 %{
@@ -184,7 +184,7 @@ x = [c_A, c_B]^T &\quad p = [x(t - N_p \Delta)^T, \ldots , x(t - \Delta)^T]^T
 \end{block}
 \begin{block}{Primer on FNNs}
 \begin{align*}
-\boldsymbol{\phi_i}(\cdot) &= \boldsymbol{\sigma}(\mathbf{W_i}(\cdot) + \mathbf{b_i}) \\
+\boldsymbol{\phi_i}(\cdot) &:= \boldsymbol{\sigma}(\mathbf{W_i}(\cdot) + \mathbf{b_i}) \\
 \beta &= (\mathbf{W_q, b_q, \ldots, W_0, b_0}) \\
 \boldsymbol{\phi}(\mathbf{u}, \beta) &= \mathbf{W_q} (\phi_{q-1} \circ \ldots \circ \phi_0(\mathbf{u})) + \mathbf{b_q} \\
 f \circ g &:= f(g(\cdot))
@@ -250,7 +250,7 @@ L(U,Y,\beta) = \sum_{i=1}^{N_tr} \sum_{k=0}^{N_t} |y_i(k) - \hat{y}_i (k)|^2
         \begin{block}{Conclusion}
         \begin{enumerate}
         \item Quantile regression is a computationally cheap uncertainty estimation method for neural network
-        \item It predicts data uncertainty not model uncertainty.
+        \item It predicts uncertainty in data not model uncertainty
         \item Ensembling (bootstrap) or Bayesian neural networks could be better approaches but are computationally expensive
         \end{enumerate}
         \end{block}
@@ -258,7 +258,7 @@ L(U,Y,\beta) = \sum_{i=1}^{N_tr} \sum_{k=0}^{N_t} |y_i(k) - \hat{y}_i (k)|^2
         \begin{column}{0.5\textwidth}
         \includegraphics[width=1\textwidth]{Uncertainty.pdf}
         \begin{center}
-        \scriptsize{The grey region indicates 2.5\% and 97.5\% quantile ranges for the hybrid model prediction.}
+        \scriptsize{The grey region indicates 2.5\% and 97.5\% quantile ranges for error in the hybrid model prediction.}
         \end{center}
         \end{column}
     \end{columns}
@@ -268,7 +268,7 @@ L(U,Y,\beta) = \sum_{i=1}^{N_tr} \sum_{k=0}^{N_t} |y_i(k) - \hat{y}_i (k)|^2
 \begin{frame}{Code and Resources}
 \begin{enumerate}
 \item All the code can be pulled from: \url{https://github.com/dakeprithvi/ChE-230D.git}
-\item If you are using linux OS, just run `make' over the repo
+\item If you are using linux OS, just run `make' over the pulled repo
 \item Advanced libraries like PyTorch or TensorFlow are deliberately avoided to keep the code simple and reproducible.
 \item For this purpose, JAX (a new library developed by Google) has been used. 
 \end{enumerate}
