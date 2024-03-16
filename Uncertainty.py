@@ -133,10 +133,10 @@ opt_init, opt_update, get_params = adam(1e-3)
 opt_state = opt_init(params)
 loss = []
 for i in range(1000):
-    grads = grad_loss(get_params(opt_state), x0_true, z0_true, t_span_true, true_solution_jax, kp, 0.25)
+    grads = grad_loss(get_params(opt_state), x0_true, z0_true, t_span_true, true_solution_jax, kp, 0.025)
     opt_state = opt_update(i, grads, opt_state)
     if i % 100 == 0:
-        loss_value = loss_fn(get_params(opt_state), x0_true, z0_true,  t_span_true, true_solution_jax, kp, 0.25)
+        loss_value = loss_fn(get_params(opt_state), x0_true, z0_true,  t_span_true, true_solution_jax, kp, 0.025)
         print(f"Iteration {i}, Loss: {loss_value:.4f}")
         loss.append(loss_value)
 
