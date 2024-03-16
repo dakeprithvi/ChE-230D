@@ -73,7 +73,7 @@
 \newcommand{\stoi}{\text{\boldmath $\nu$}}
 
 
-\title[Citation informed NODE]{Towards a citation-informed neural ODE \\ or better \\ \textbf{Tell me when can I become tenured!}}
+\title[Model identification]{Model identification and uncertainty prediction using deep learning}
 
 \author[ChE230D---Dake]{Prithvi Dake}
 \institute [UCSB]{Department of Chemical
@@ -102,47 +102,121 @@
 \tableofcontents
 \end{frame}
 
-\section{Compartment model for citation dynamics}
-\subsection{Parallels with epidemiological SIR model}
-\begin{frame}{Parallels with epidemiological SIR model \small{(citation begets citations)}}
-\begin{itemize}
-\item Citation dynamics describes the number of references received by the article or other scientific work over time (and numerous studies have been conducted over it)\footnote{\tiny{Reia, S.M. and Fontanari, J.F., 2021. A SIR epidemic model for citation dynamics. The European Physical Journal Plus}}
-\item What if we let S = Susceptibles, I = Influencers and R = Recovered/Adopters ?\footnote{\tiny {ZombieTown USA \href{https://mattbierbaum.github.io/zombies-usa}{\textcolor{blue}{Here's the link!}}}}
-\end{itemize}
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.85\textwidth]{SIR}
-\end{figure}
+\section{Incentive for deep learning (specifically hybrid modelling)}
+\begin{frame}
+    \frametitle{Introduction}
+    
+    \begin{columns}
+    {   \begin{column}{0.45\textwidth}
+        \begin{block}{Motivation}
+        \begin{enumerate}
+        \item Interactions are difficult to model
+        \item We can't use the plant for ourselves!
+        \item These interactions are too expensive to investigate
+        \item Some crucial intermediates are never measured (partial state measurements)
+        \end{enumerate}
+\end{block}
+\begin{block}{Solution}
+\begin{enumerate}
+\item Construct a complete black-box model
+\item OR use neural networks to represent diffcult-to-model portions of a first-principles model
+\end{enumerate}
+\end{block}
+        \end{column}}
+        \begin{column}{0.55\textwidth}
+            \begin{figure}
+
+\includegraphics[width=0.8\textwidth]{process.pdf}
+
+Don't expect data particularly useful for model building in closed-loop plants
+\includegraphics[width=0.8\textwidth]{control.pdf}
+ \end{figure}
+        \end{column}
+    \end{columns}
 \end{frame}
 
-\subsection{A$\rightleftharpoons$B$\rightarrow$C but with unknown kinetics}
-\begin{frame}{A$\rightleftharpoons$B$\rightarrow$C but with unknown kinetics}
-  \begin{block}{}
-    \begin{enumerate}
-\item Determine a ``structure'' of the dynamic model based 
-on cumulative citation history (in this case the variable $R$). This model contains NNs 
-to represent the unknown functions that are challenging to parameterize 
-and maintain
+
+
+\section{Case study for partial state measurement}
+\begin{frame}
+    \frametitle{Sample training data}
+    
+    \begin{columns}
+    {   \begin{column}{0.37\textwidth}
+        \begin{block}{Data generating model - noise added}
 \begin{align*}
-\dfrac{d \mathbf{x}}{d t} &= \mathbf{f}(\mathbf{x, z}; \theta_{NN}) \\
-\mathbf{z(t)} &= [\mathbf{x'_{t-1},x'_{t-2} \ldots x'_{t-\Delta}}]'\\
-\mathbf{x} \in \R^3 &\qquad \mathbf{f} \in \R^3 \rightarrow \R^3
+\dfrac{dc_A}{dt} &= \dfrac{Q_f (c_{Af} - c_A)}{V} - r_1 \\
+\dfrac{dc_B}{dt} &= \dfrac{-Q_f c_B}{V} + r_1 - 3r_2 \\
+\dfrac{dc_c}{dt} &= \dfrac{-Q_f c_C}{V} + r_2 
 \end{align*}
-\item Similar to S$\rightleftharpoons$I$\rightarrow$R but with unknown kinetics (or rather parameters that depend on many \textit{features})
-\item Notice that $I(t_0) = R(t_0) = 0$ while $S(t_0) = S_0$ a theoretical susceptible number of audience for a given paper.
-\item Adding to the complexity is the fact that $S$ and $I$ are imaginary intermediates\footnote{\tiny{`imaginary' here means dummy variables, not complex}} that cannot be quantified easily.
-\item Conservation law: $S(t_0) = S(t) + I(t) + R(t)$
-\item Obviously  true law: $\mathbf{x} \geq 0$
-\end{enumerate}
-  \end{block}
+\begin{align*}
+r_1 = k_1 c_A &\quad r_2 = k_2 c_B^3 - k_{-2} c_C \\
+y = (c_A, c_B) &\quad u = c_{Af}
+\end{align*}
+\end{block}
+Simulated data for the process model using PRBS signal
+        \end{column}}
+        \begin{column}{0.63\textwidth}
+            \begin{figure}
+\includegraphics[width=0.95\textwidth]{Datagen.pdf}
+ \end{figure}
+        \end{column}
+    \end{columns}
 \end{frame}
-\section{Neural ODE framework}
-\subsection{Multistep ahead prediction error minimization}
-\section{PINNS}
-\subsection{How are citation constraints employed in Neural ODE?}
-\subsection{Making it smarter}
-\section{A limited example}
-\section{Resources}
+
+
+\section{Structured greybox model}
+\begin{frame}
+    \frametitle{Structured greybox model}
+    
+    \begin{columns}
+    {   \begin{column}{0.57\textwidth}
+        \begin{block}{Hybrid model}
+\begin{align*}
+\dfrac{dc_A}{dt} &= \dfrac{Q_f (c_{Af} - c_A)}{V} - \phi_1 (\mathbf{x, p}, u,\beta) \\
+\dfrac{dc_B}{dt} &= \dfrac{-Q_f c_B}{V} + \phi_1 (\mathbf{x, p}, u,\beta) - 3 \phi_2 (\mathbf{x, p}, u,\beta) 
+\end{align*}
+\begin{align*}
+y = (c_A, c_B) &\quad u = c_{Af} \\
+x = [c_A, c_B]^T &\quad p = [x(t - N_p \Delta)^T, \ldots , x(t - \Delta)^T]^T 
+\end{align*}
+\end{block}
+\begin{block}{Primer on FNNs}
+\begin{align*}
+\boldsymbol{\phi_i}(\cdot) &= \boldsymbol{\sigma}(\mathbf{W_i}(\cdot) + \mathbf{b_i}) \\
+\beta &= (\mathbf{W_q, b_q, \ldots, W_0, b_0}) \\
+\boldsymbol{\phi}(\mathbf{u}, \beta) &= \mathbf{W_q} (\phi_{q-1} \circ \ldots \circ \phi_0(\mathbf{u})) + \mathbf{b_q} \\
+f \circ g &:= f(g(\cdot))
+\end{align*}
+\end{block}
+        \end{column}}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+\includegraphics[width=1.\textwidth]{cricket.jpg}
+\scriptsize{Reconstructing unmeasured states with history \\ Hawkeye technology in cricket \\ Famous DRS by Tendulkar on LBW \\ India won btw (World Cup 2011)!}
+\newline
+\begin{alertblock}{}
+\begin{equation*}
+L(U,Y,\beta) = \sum_{i=1}^{N_tr} \sum_{k=0}^{N_t} |y_i(k) - \hat{y}_i (k)|^2
+\end{equation*}
+\begin{enumerate}
+\scriptsize
+\item Custom integrator like RK4
+\item Take care to simultaneously update the past vector \textbf{p}
+\item $\dfrac{\partial L}{\partial \beta}$ use autodifferentiation libraries
+\item Eg. Pytorch, TensorFlow or JAX
+\end{enumerate}
+\end{alertblock}
+
+ \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+
+
+
 
 \begin{frame}{Resources}
 \begin{figure}[H]
