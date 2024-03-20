@@ -127,10 +127,10 @@ rng = jax.random.PRNGKey(0)
 params = init_network_params(layer_sizes, rng)
 
 grad_loss = grad(loss_fn)
-opt_init, opt_update, get_params = adam(1e-3)
+opt_init, opt_update, get_params = adam(1e-2)
 opt_state = opt_init(params)
 loss = []
-for i in range(1000):
+for i in range(2000):
     grads = grad_loss(get_params(opt_state), x0_true, z0_true, t_span_true, true_solution_jax, kp)
     opt_state = opt_update(i, grads, opt_state)
     if i % 100 == 0:
@@ -164,7 +164,7 @@ axs[2].plot(cfa, 'k', label = r"$c_{Af}$")
 axs[2].set_xlabel("Time (min)")
 axs[2].set_ylabel(r"$c_{Af}$")
 
-axs[3].plot(np.linspace(0,1000,len(loss)), loss, 'b', label = "SSE")
+axs[3].semilogy(np.linspace(0,1000,len(loss)), loss, 'b', label = "SSE")
 axs[3].set_xlabel("Number of iterations")
 axs[3].set_ylabel("SSE")
 
