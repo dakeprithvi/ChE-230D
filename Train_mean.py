@@ -149,18 +149,18 @@ kp = [0.6, 15, cfa]
 fig, axs = plt.subplots(4, 1, figsize=(9, 10)) # 2 rows, 1 column
 fitted_solution = RK4_ode(x0_true, z0_true, t_span_true, params_opt, kp)
 # Plot A_true and A on the first subplot
-axs[0].plot(true_solution_j[0], 'r', label="Plant")
-axs[0].plot(fitted_solution.T[0],'k',label="Struc")
+axs[0].plot(np.linspace(0,200,len(true_solution[0])), true_solution_j[0], 'r', label="Plant")
+axs[0].plot(np.linspace(0,200,len(fitted_solution.T[0])), fitted_solution.T[0],'k',label="Struc")
 axs[0].set_ylabel(r"$c_A$")
 
 
 # Plot B_true (assuming this is the same as the true B) and B on the second subplot
-axs[1].plot(true_solution_j[1], 'g', label="Plant")
-axs[1].plot(fitted_solution.T[1],'k',label="Struc")
+axs[1].plot(np.linspace(0,200,len(true_solution[1])), true_solution_j[1], 'g', label="Plant")
+axs[1].plot(np.linspace(0,200,len(fitted_solution.T[1])), fitted_solution.T[1],'k',label="Struc")
 axs[1].set_ylabel(r"$c_B$")
 
 
-axs[2].plot(cfa, 'k', label = r"$c_{Af}$")
+axs[2].plot(np.linspace(0,200,len(cfa)), cfa, 'k', label = r"$c_{Af}$")
 axs[2].set_xlabel("Time (min)")
 axs[2].set_ylabel(r"$c_{Af}$")
 
@@ -215,18 +215,18 @@ x0_true = jnp.array([0.3,0.2])
 fig, axs = plt.subplots(3, 1, figsize=(9, 10)) # 2 rows, 1 column
 fitted_solution = RK4_ode(x0_true, z0_true, t_span_true, params_opt, kp)
 # Plot A_true and A on the first subplot
-axs[0].plot(true_solution_j[0], 'r', label="Plant")
-axs[0].plot(fitted_solution.T[0],'k',label="Struc")
+axs[0].plot(np.linspace(0,200,len(true_solution[0])), true_solution_j[0], 'r', label="Plant")
+axs[0].plot(np.linspace(0,200,len(fitted_solution.T[0])), fitted_solution.T[0],'k',label="Struc")
 axs[0].set_ylabel(r"$c_A$")
-axs[0].legend()
+
 
 # Plot B_true (assuming this is the same as the true B) and B on the second subplot
-axs[1].plot(true_solution_j[1], 'g', label="Plant")
-axs[1].plot(fitted_solution.T[1],'k',label="Struc")
+axs[1].plot(np.linspace(0,200,len(true_solution[1])), true_solution_j[1], 'g', label="Plant")
+axs[1].plot(np.linspace(0,200,len(fitted_solution.T[1])), fitted_solution.T[1],'k',label="Struc")
 axs[1].set_ylabel(r"$c_B$")
-axs[1].legend()
 
-axs[2].plot(cfa, 'b', label = r"$c_{Af}$")
+
+axs[2].plot(np.linspace(0,200,len(cfa)), cfa, 'k', label = r"$c_{Af}$")
 axs[2].set_xlabel("Time (min)")
 axs[2].set_ylabel(r"$c_{Af}$")
 

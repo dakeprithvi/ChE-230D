@@ -285,20 +285,20 @@ fitted_solution = RK4_ode(x0_true, z0_true, t_span_true, params_opt, kp)
 f1 = RK4_ode(x0_true, z0_true, t_span_true, params_opt1, kp)
 f2 = RK4_ode(x0_true, z0_true, t_span_true, params_opt2, kp)
 # Plot A_true and A on the first subplot
-axs[0].plot(true_solution_j[0], 'r', label="Plant")
-axs[0].plot(fitted_solution.T[0],'k',label="Struc")
-axs[0].fill_between(range(len(f1.T[0])), f1.T[0], f2.T[0], color='gray', alpha=0.5)
+axs[0].plot(np.linspace(0,200,len(true_solution_j[0])),true_solution_j[0], 'r', label="Plant")
+axs[0].plot(np.linspace(0,200,len(fitted_solution.T[0])),fitted_solution.T[0],'k',label="Struc")
+axs[0].fill_between(np.linspace(0,200,len(f1.T[0])), f1.T[0], f2.T[0], color='gray', alpha=0.5)
 axs[0].set_ylabel(r"$c_A$")
 axs[0].legend()
 
 # Plot B_true (assuming this is the same as the true B) and B on the second subplot
-axs[1].plot(true_solution_j[1], 'g', label="Plant")
-axs[1].plot(fitted_solution.T[1],'k',label="Struc")
-axs[1].fill_between(range(len(f1.T[1])), f1.T[1], f2.T[1], color='gray', alpha=0.5)
+axs[1].plot(np.linspace(0,200,len(true_solution_j[1])), true_solution_j[1], 'g', label="Plant")
+axs[1].plot(np.linspace(0,200,len(fitted_solution.T[1])), fitted_solution.T[1],'k',label="Struc")
+axs[1].fill_between(np.linspace(0,200,len(f1.T[1])), f1.T[1], f2.T[1], color='gray', alpha=0.5)
 axs[1].set_ylabel(r"$c_B$")
 axs[1].legend()
 
-axs[2].plot(cfa, 'b', label = r"$c_{Af}$")
+axs[2].plot(np.linspace(0,200,len(cfa)), cfa, 'b', label = r"$c_{Af}$")
 axs[2].set_xlabel("Time (min)")
 axs[2].set_ylabel(r"$c_{Af}$")
 
